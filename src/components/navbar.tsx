@@ -8,11 +8,11 @@ export default function Navbar() {
             <div className={styles.logo}>
                 <Image
                     src="/logo.svg"
-                    alt="bulletinator logo"
+                    alt="Bulletinator logo"
                     width={50}
                     height={50}
                 />
-                <h1>bulletinator</h1>
+                <h1>Bulletinator</h1>
             </div>
             <div className={styles.links}>
                 <Link href="/boards/test">
