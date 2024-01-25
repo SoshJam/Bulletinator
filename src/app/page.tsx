@@ -1,4 +1,10 @@
 import styles from "./page.module.scss";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Bulletinator",
+  description: "Bulletinator is a bulletin board app for planning your next project.",
+};
 
 export default function Home() {
   return (
