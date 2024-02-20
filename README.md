@@ -1,6 +1,6 @@
 # Bulletinator
 
-This is a Next.js app created by Sam Hill. It allows users to create bulletin boards to organize ideas, images, todo-lists, links, etc.
+This is a Next.js app created by Sam Hill. When complete, it will allow users to create bulletin boards to organize ideas, images, todo-lists, links, etc.
 
 ## Features
 
@@ -13,7 +13,9 @@ This is a Next.js app created by Sam Hill. It allows users to create bulletin bo
   - Links
   - Embedded YouTube videos
   - Links to sub-boards
-- Users can drag and drop cards
+  - Todo lists
+  - Lists of these cards
+- Users can drag and drop cards to move them around, and click on them to edit them.
 - When a board is modified it will automatically be saved to the database.
 
 ## Project Information
