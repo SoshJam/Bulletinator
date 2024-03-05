@@ -1,10 +1,10 @@
 import clientPromise from "@/lib/mongodb";
-import { Board, BoardError } from '@/lib/types';
+import { Board, DatabaseError, User } from '@/lib/types';
 
 import { MongoClient, Db, WithId, Document, ObjectId } from 'mongodb';
 
 /* Get one board */
-export async function getBoardById(id: string): Promise<Board | BoardError> {
+export async function getBoardById(id: string): Promise<Board | DatabaseError> {
     // Connect to MongoDB
     const client: MongoClient | undefined = await clientPromise;
     if (!client) throw new Error("Database connection unavailable.");
@@ -27,13 +27,13 @@ export async function getBoardById(id: string): Promise<Board | BoardError> {
         return board;
     } catch (e) {
         // Return an error
-        const res: BoardError = { error: "An error occurred while trying to fetch the board." };
+        const res: DatabaseError = { error: "An error occurred while trying to fetch the board." };
         return res;
     }
 }
 
 /* Get all boards */
-export async function getAllBoards(): Promise<Board[] | BoardError> {
+export async function getAllBoards(): Promise<Board[] | DatabaseError> {
     // Connect to MongoDB
     const client = await clientPromise;
     if (!client) throw new Error("Database connection unavailable.");
@@ -56,7 +56,36 @@ export async function getAllBoards(): Promise<Board[] | BoardError> {
         return boards;
     } catch(e) {
         // Return an error
-        const res: BoardError = { error: "An error occurred while trying to fetch the boards." };
+        const res: DatabaseError = { error: "An error occurred while trying to fetch the boards." };
+        return res;
+    }
+}
+
+/* Get the boardIDs associated with a given user */
+export async function getBoardsByEmail(email: string): Promise<String[] | DatabaseError> {
+    // Connect to MongoDB
+    const client: MongoClient | undefined = await clientPromise;
+    if (!client) throw new Error("Database connection unavailable.");
+
+    const db: Db = client.db("bulletinator");
+    
+    // Attempt to get the user
+    try {
+        // Get the user
+        const res: WithId<Document> | null = await db.collection('users').findOne({ email });
+        if (!res) throw new Error("Database connection error.");
+        
+        // Extract the user info
+        const user: User = {
+            _id: res._id.toHexString(),
+            boardIds: res.boardIds || []
+        }
+        
+        // Return the user's board IDs as strings
+        return user.boardIds.map((id: ObjectId) => id.toHexString());
+    } catch (e) {
+        // Return an error
+        const res: DatabaseError = { error: "An error occurred while trying to fetch the user." };
         return res;
     }
 }
