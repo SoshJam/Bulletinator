@@ -12,6 +12,11 @@ export default function BoardListPage({ params }: Readonly<{ params: { id: strin
     return (
         <main>
             <h1>Boards</h1>
+
+            {/* New board button */}
+            <button>Create a new board</button>
+
+            {/* List of boards */}
             <BoardList params={params}/>
         </main>
     );

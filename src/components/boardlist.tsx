@@ -3,6 +3,7 @@
 import styles from "./boardlist.module.scss";
 import { useState, useEffect } from "react";
 import { Board } from '@/lib/types';
+import Link from "next/link";
 
 export function BoardList({ params }: Readonly<{ params: { id: string } }>) {
 
@@ -25,7 +26,9 @@ export function BoardList({ params }: Readonly<{ params: { id: string } }>) {
         <ul>
             {boards.map((board: Board) => (
                 <li key={board._id}>
-                    {board.title}
+                    <Link href={`/boards/${board._id}`}>
+                        {board.title}
+                    </Link>
                 </li>
             ))}
         </ul>
