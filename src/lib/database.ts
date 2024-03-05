@@ -62,7 +62,7 @@ export async function getAllBoards(): Promise<Board[] | DatabaseError> {
 }
 
 /* Get the boardIDs associated with a given user */
-export async function getBoardsByEmail(email: string): Promise<String[] | DatabaseError> {
+export async function getBoardsByEmail(email: string): Promise<string[] | DatabaseError> {
     // Connect to MongoDB
     const client: MongoClient | undefined = await clientPromise;
     if (!client) throw new Error("Database connection unavailable.");
