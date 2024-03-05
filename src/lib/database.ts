@@ -78,11 +78,12 @@ export async function getBoardsByEmail(email: string): Promise<string[] | Databa
         // Extract the user info
         const user: User = {
             _id: res._id.toHexString(),
-            boardIds: res.boardIds || []
+            email: res.email,
+            boardIds: res.boards?.map((id: ObjectId) => id.toHexString()) || []
         }
         
         // Return the user's board IDs as strings
-        return user.boardIds.map((id: ObjectId) => id.toHexString());
+        return user.boardIds;
     } catch (e) {
         // Return an error
         const res: DatabaseError = { error: "An error occurred while trying to fetch the user." };
