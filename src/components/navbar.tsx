@@ -5,15 +5,17 @@ import Link from "next/link";
 export default function Navbar() {
     return (
         <nav className={styles.nav}>
-            <div className={styles.logo}>
-                <Image
-                    src="/logo.svg"
-                    alt="Bulletinator logo"
-                    width={50}
-                    height={50}
-                />
-                <h1>Bulletinator</h1>
-            </div>
+            <Link href="/">
+                <div className={styles.logo}>
+                    <Image
+                        src="/logo.svg"
+                        alt="Bulletinator logo"
+                        width={50}
+                        height={50}
+                    />
+                    <h1>Bulletinator</h1>
+                </div>
+            </Link>
             <div className={styles.links}>
                 <Link href="/boards/test">
                     Boards
