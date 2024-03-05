@@ -9,9 +9,18 @@ export function isBoard(object: any): object is Board {
 };
 
 // BoardError
-export type BoardError = {
+export type DatabaseError = {
     error: string;
 };
-export function isBoardError(object: any): object is BoardError {
+export function isDatabaseError(object: any): object is DatabaseError {
     return 'error' in object;
+};
+
+// User
+export type User = {
+    _id: string;
+    boardIds: [];
+}
+export function isUser(object: any): object is User {
+    return '_id' in object && 'boardIds' in object;
 };
