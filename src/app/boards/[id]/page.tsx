@@ -1,15 +1,15 @@
 import styles from "./page.module.scss";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getBoardById } from "@/lib/database";
-import { Board, BoardError, isBoardError } from '@/lib/types';
+import { Board, DatabaseError, isDatabaseError } from '@/lib/types';
 
 export async function generateMetadata(
     { params }: Readonly<{ params: { id: string } }>,
     parent: ResolvingMetadata
 ): Promise<Metadata> {
-    const board: Board | BoardError = await getBoardById(params.id);
+    const board: Board | DatabaseError = await getBoardById(params.id);
     
-    if (isBoardError(board))
+    if (isDatabaseError(board))
         return { title: "Error | Bulletinator" }
 
     return {
@@ -18,11 +18,11 @@ export async function generateMetadata(
 }
 
 export default async function BoardPage({ params }: Readonly<{ params: { id: string } }>) {
-    const board: Board | BoardError = await getBoardById(params.id);
+    const board: Board | DatabaseError = await getBoardById(params.id);
 
     return (
         <main>
-            <h1>Board {isBoardError(board) ? "Error" : board.title}</h1>
+            <h1>Board {isDatabaseError(board) ? "Error" : board.title}</h1>
         </main>
     );
 }
