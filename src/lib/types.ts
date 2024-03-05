@@ -19,6 +19,7 @@ export function isDatabaseError(object: any): object is DatabaseError {
 // User
 export type User = {
     _id: string;
+    email: string;
     boardIds: [];
 }
 export function isUser(object: any): object is User {
