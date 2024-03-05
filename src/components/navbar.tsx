@@ -17,7 +17,7 @@ export default function Navbar() {
                 </div>
             </Link>
             <div className={styles.links}>
-                <Link href="/boards/test">
+                <Link href="/boards/">
                     Boards
                 </Link>
             </div>
